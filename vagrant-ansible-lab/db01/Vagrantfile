@@ -1,0 +1,7 @@
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/focal64"
+    config.vm.hostname = "db01"
+    config.vm.network "private_network", ip: "192.168.1.4"
+    config.vm.network "fowarded_port", guest: 3306, host: 3306
+  end
+  
