@@ -41,3 +41,18 @@ WantedBy=multi-user.target
 EOT
 
 service sonar start
+echo "Sonar Iniciado"
+
+# instalar sonar scanner
+wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-x64.zip
+unizp sonar-scanner-cli-6.2.1.4610-linux-x64.zip -d /opt/
+mv /opt/sonar-scanner-cli-6.2.1.4610-linux-x64 /opt/sonar-scanner
+chown -R sonar:sonar /opt/sonar-scanner
+echo 'export PATH=$PATH:/opt/sonar-scanner/bin' | sudo tee -a /etc/profile
+
+# installs fnm (Fast Node Manager)
+winget install Schniz.fnm
+# configure fnm environment
+fnm env --use-on-cd | Out-String | Invoke-Expression
+# download and install Node.js
+fnm use --install-if-missing 22
